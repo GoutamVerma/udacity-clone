@@ -34,7 +34,7 @@ const SignInForm = () => {
         <input type="email" id="email" name="email" className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" placeholder="Email address" />
         <input type="password" id="password" name="Password" className="w-full px-4 py-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" placeholder="Password" />
         </div>
-        <p className='text-sm text-center p-4 font-polySans'>By clicking "Sign in," you agree to our <a href="https://www.udacity.com/legal/terms-of-service" className="underline">Terms of Use</a> and our <a href="https://www.udacity.com/legal/privacy" className="underline">Privacy Policy</a>.</p>
+        <p className='text-sm text-center p-4 font-polySans'>By clicking &quot;Sign in,&quot; you agree to our <a href="https://www.udacity.com/legal/terms-of-service" className="underline">Terms of Use</a> and our <a href="https://www.udacity.com/legal/privacy" className="underline">Privacy Policy</a>.</p>
         <button type="submit" className="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-blue-600">Sign in</button>
 
         <div>
