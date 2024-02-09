@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignInForm from "./form/SignInForm";
 import SignUpForm from "./form/SignUpForm";
 
@@ -8,7 +8,7 @@ enum Mode {
   SignUp,
 }
 
-const MainComponent: React.FC = () => {
+const MainComponent: React.FC = () => { 
   const [mode, setMode] = useState(Mode.SignIn);
 
   const toggleMode = (selectedMode: Mode) => {

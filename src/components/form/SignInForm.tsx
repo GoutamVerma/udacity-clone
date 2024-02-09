@@ -1,6 +1,65 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+
+interface Errors {
+  email: string;
+  password: string;
+}
 
 const SignInForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<Errors>({ email: "", password: "" });
+  const [touched, setTouched] = useState<{ email: boolean; password: boolean }>(
+    { email: false, password: false }
+  );
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isSignInClicked, setIsSignInClicked] = useState(false);
+
+  useEffect(() => {
+    validateForm();
+  }, [email, password]);
+
+  const validateForm = () => {
+    let emailError = "";
+    let passwordError = "";
+
+    if (email === "") {
+      emailError = "Email is required";
+    } else if (!email.includes("@")) {
+      emailError = "Invalid email format";
+    }
+
+    if (password === "") {
+      passwordError = "Password is required";
+    } else if (password.length < 8) {
+      passwordError = "Password must be at least 8 characters long";
+    }
+
+    setErrors({ email: emailError, password: passwordError });
+    setIsFormValid(emailError === "" && passwordError === "");
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    if (field === "email") {
+      setTouched({ ...touched, email: true });
+      setEmail(value);
+    } else if (field === "password") {
+      setTouched({ ...touched, password: true });
+      setPassword(value);
+    }
+  };
+
+  const handleSubmit = () => {
+    validateForm();
+    setIsSignInClicked(true);
+    if (isFormValid) {
+      console.log("Form is valid");
+    } else {
+      console.log("Form is invalid");
+    }
+  };
+
   return (
     <div className="p-10 bg-white shadow-md rounded-md">
       <div className="mb-8">
@@ -12,8 +71,15 @@ const SignInForm = () => {
           future-proof your career.
         </p>
       </div>
+      {isSignInClicked && !isFormValid && (
+        <div className="text-start p-5  font-polySans items-center bg-orange-600 rounded">
+          <p className="text-white text-base">
+            Must specify an email and password
+          </p>
+        </div>
+      )}
 
-      <div className="flex justify-around items-center">
+      <div className="flex justify-around py-5 items-center">
         <button className="bg-white hover:bg-gray-100 text-black py-2 px-4 border border-gray-400 rounded flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -69,16 +135,29 @@ const SignInForm = () => {
           type="email"
           id="email"
           name="email"
-          className="mb-3 w-full p-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          className={`mb-3 w-full p-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 ${
+            touched.email && errors.email && "border-red-500"
+          }`}
           placeholder="Email address"
+          onChange={(e) => handleInputChange("email", e.target.value)}
         />
+        {touched.email && errors.email && (
+          <p className="text-red-500 text-sm">{errors.email}</p>
+        )}
+
         <input
           type="password"
           id="password"
           name="Password"
-          className="w-full p-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-50"
+          className={`w-full p-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-50 ${
+            touched.password && errors.password && "border-red-500"
+          }`}
           placeholder="Password"
+          onChange={(e) => handleInputChange("password", e.target.value)}
         />
+        {touched.password && errors.password && (
+          <p className="text-red-500 py-1 text-sm">{errors.password}</p>
+        )}
       </div>
       <p className="text-sm text-center p-4 font-polySans">
         By clicking &quot;Sign in,&quot; you agree to our{" "}
@@ -96,6 +175,7 @@ const SignInForm = () => {
       </p>
       <button
         type="submit"
+        onClick={handleSubmit}
         className="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-blue-600"
       >
         Sign In
