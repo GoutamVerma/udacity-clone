@@ -21,9 +21,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         <main className="h-screen flex flex-col py-20 items-center bg-gray-100 mt-10 mb-10">
-        <SignInSignUp />
+          <SignInSignUp />
         </main>
-       </body>
+      </body>
     </html>
   );
 }
