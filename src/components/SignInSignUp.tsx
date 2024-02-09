@@ -37,18 +37,8 @@ const MainComponent: React.FC = () => {
       </div>
 
       <div className="w-full">
-        <div
-          style={{ display: mode === Mode.SignIn ? "block" : "none" }}
-          className="w-full"
-        >
-          <SignInForm />
-        </div>
-        <div
-          style={{ display: mode === Mode.SignUp ? "block" : "none" }}
-          className="w-full"
-        >
-          <SignUpForm />
-        </div>
+        {mode === Mode.SignIn && <SignInForm />}
+        {mode === Mode.SignUp && <SignUpForm />}
       </div>
     </div>
   );

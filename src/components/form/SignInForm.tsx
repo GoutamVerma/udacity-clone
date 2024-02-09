@@ -62,8 +62,8 @@ const SignInForm = () => {
 
   return (
     <div className="p-10 bg-white shadow-md rounded-md">
-      <div className="mb-8">
-        <h2 className="text-5xl text-center text-black font-polySans leading-15">
+      <div className="mb-2">
+        <h2 className="text-4xl text-center font-medium text-black font-polySans leading-15">
           Sign in to your account.
         </h2>
         <p className="text-black text-center py-4">
@@ -72,14 +72,14 @@ const SignInForm = () => {
         </p>
       </div>
       {isSignInClicked && !isFormValid && (
-        <div className="text-start p-5  font-polySans items-center bg-orange-600 rounded">
+        <div className="text-start p-5 font-polySans items-center bg-orange-600 rounded">
           <p className="text-white text-base">
             Must specify an email and password
           </p>
         </div>
       )}
 
-      <div className="flex justify-around py-5 items-center">
+      <div className="flex justify-around items-center mt-4">
         <button className="bg-white hover:bg-gray-100 text-black py-2 px-4 border border-gray-400 rounded flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ const SignInForm = () => {
               d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
             ></path>
           </svg>
-          <span className="ml-2">Sign in with Google</span>
+          <span className="ml-2 text-sm">Sign in with Google</span>
         </button>
 
         <button className="bg-white hover:bg-gray-100 text-black py-2 px-2 border border-gray-400  rounded flex items-center">
@@ -122,7 +122,7 @@ const SignInForm = () => {
               ></path>
             </g>
           </svg>
-          <span className="ml-2">Sign in with Facebook</span>
+          <span className="ml-2 text-sm">Sign in with Facebook</span>
         </button>
       </div>
 

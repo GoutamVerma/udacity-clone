@@ -19,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <main className="h-screen flex flex-col py-20 items-center bg-gray-100 mt-10 mb-10">
+      <main className="h-screen flex flex-col py-20 items-center bg-gray-100 mt-10 mb-10">
+          <Navbar />
           <SignInSignUp />
         </main>
       </body>

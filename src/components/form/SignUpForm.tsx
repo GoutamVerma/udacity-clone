@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+interface Errors {
+  email: string;
+}
 
 const SignUpForm = () => {
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState<Errors>({ email: "" });
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [touched, setTouched] = useState<{ email: boolean }>({ email: false });
+
+  useEffect(() => {
+    validateEmail();
+  }, [email, touched]);
+
+  const validateEmail = () => {
+    let emailError = "";
+
+    if (touched.email && email === "") {
+      emailError = "Email is required";
+    } else if (touched.email && !email.includes("@")) {
+      emailError = "is not a valid email";
+    }
+
+    setErrors({ email: emailError });
+    setIsFormValid(emailError === "");
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    if (field === "email") {
+      setTouched({ ...touched, email: true });
+      setEmail(value);
+    }
+  };
+
+  const handleSubmit = () => {
+    setTouched({ ...touched, email: true });
+    validateEmail();
+  };
+
   return (
     <div className="p-10 bg-white shadow-md rounded-md">
-      <div className="mb-8">
-        <h2 className="text-5xl text-center text-black font-polySans leading-15">
+      <div className="mb-2">
+        <h2 className="text-4xl text-center font-medium text-black font-polySans leading-15">
           Create your account.
         </h2>
         <p className="text-black text-center py-4">
@@ -40,7 +78,7 @@ const SignUpForm = () => {
               d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
             ></path>
           </svg>
-          <span className="ml-2">Sign up with Google</span>
+          <span className="ml-2 text-sm">Sign up with Google</span>
         </button>
 
         <button className="bg-white hover:bg-gray-100 text-black py-2 px-2 border border-gray-400  rounded flex items-center">
@@ -56,7 +94,7 @@ const SignUpForm = () => {
               ></path>
             </g>
           </svg>
-          <span className="ml-2">Sign up with Facebook</span>
+          <span className="ml-2 text-sm">Sign up with Facebook</span>
         </button>
       </div>
 
@@ -69,9 +107,32 @@ const SignUpForm = () => {
           type="email"
           id="email"
           name="email"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          className={`w-full px-4 p-2 py-2 border border-gray-300 rounded focus:outline-none ${
+            touched.email &&
+            errors.email &&
+            "border-solid border-2 border-red-600 bg-sky-100"
+          }`}
           placeholder="Email address"
+          onChange={(e) => handleInputChange("email", e.target.value)}
         />
+        {touched.email && errors.email && (
+          <div className="bg-red-100 p-2 rounded flex items-center mt-2">
+            <svg
+              x="0px"
+              y="0px"
+              width="30"
+              height="30"
+              viewBox="0 0 32 32"
+              className="mr-2" 
+            >
+              <path
+                d="M16.874 6.514l10 18A1 1 0 0 1 26 26H6a1 1 0 0 1-.874-1.486l10-18a1 1 0 0 1 1.748 0zM7.7 24h16.6L16 9.06 7.7 24zm8.3-2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-1-8a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4z"
+                fill="#FF0000"
+              ></path>
+            </svg>
+            <p className="text-black text-sm">{errors.email}</p>
+          </div>
+        )}
       </div>
       <p className="text-sm text-center p-4 font-polySans">
         By clicking &quot;Sign up,&quot; you agree to our{" "}
@@ -89,6 +150,7 @@ const SignUpForm = () => {
       </p>
       <button
         type="submit"
+        onClick={handleSubmit}
         className="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-blue-600"
       >
         Sign Up
