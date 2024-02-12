@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+  x="0px"
+  y="0px"
+  width="30"
+  height="30"
+  viewBox="0 0 32 32"
+  className="mr-2"
+>
+  <path
+    d="M16.874 6.514l10 18A1 1 0 0 1 26 26H6a1 1 0 0 1-.874-1.486l10-18a1 1 0 0 1 1.748 0zM7.7 24h16.6L16 9.06 7.7 24zm8.3-2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-1-8a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4z"
+    fill="#FF0000"
+  ></path>
+</svg>
